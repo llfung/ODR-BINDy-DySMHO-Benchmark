@@ -1,4 +1,8 @@
-# DySMHO
+# A Fork of the DySMHO repo to reproduce results to benchmark against ODR-BINDy
+
+This repo contain the run scripts that reproduces the benchmarking examples to compare DySMHO against ODR-BINDy. Most hyperparameters used are stated in the paper, but one may find more subtle settings used in the benchmarking examples.
+
+# Original DySMHO and installation instructions for DySMHO
 
 Data-driven discovery of governing equations for dynamical systems via moving horizon optimization. A description of the methods used, main properties, and numerical case studies can be found [here](https://arxiv.org/abs/2108.00069).
 
@@ -15,7 +19,7 @@ Data-driven discovery of governing equations for dynamical systems via moving ho
 - [matplotlib](https://matplotlib.org/) 3.4.3
 - [GAMS](https://www.gams.com/)
 	- [CONOPT](http://www.conopt.com/) Nonlinear solver (license is required for large instances)
-	- See [here](https://www.markdownguide.org/basic-syntax/) for configuration instructions 
+	- See here (missing link from original repo!!) for configuration instructions 
 
 ### Hardware requirements 
 DySMHO requires only a standard computer with enough RAM to support the in-memory operations. The code has been tested on the following systems:
