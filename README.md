@@ -2,7 +2,7 @@
 
 This repo contain the run scripts that reproduces the benchmarking examples to compare DySMHO against ODR-BINDy. Most hyperparameters used are stated in the paper, but one may find more subtle settings used in the benchmarking examples.
 
-# Original DySMHO and installation instructions for DySMHO
+# Original ReadMe and installation instructions for DySMHO
 
 Data-driven discovery of governing equations for dynamical systems via moving horizon optimization. A description of the methods used, main properties, and numerical case studies can be found [here](https://arxiv.org/abs/2108.00069).
 
@@ -17,7 +17,7 @@ Data-driven discovery of governing equations for dynamical systems via moving ho
 - [scikit-learn](https://scikit-learn.org/) 0.24.2
 - [statsmodels](https://www.statsmodels.org/stable/index.html) 0.12.2
 - [matplotlib](https://matplotlib.org/) 3.4.3
-- [GAMS](https://www.gams.com/)
+- [GAMS](https://www.gams.com/) - N.B.: Due to licensing, we have replaced it with `IPOPT` in the benchmark 
 	- [CONOPT](http://www.conopt.com/) Nonlinear solver (license is required for large instances)
 	- See here (missing link from original repo!!) for configuration instructions 
 
