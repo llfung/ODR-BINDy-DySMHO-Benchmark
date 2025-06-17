@@ -1,3 +1,7 @@
-DySHMO_Env/
+DySMHO_Env/
+*.mat
+bindir/
+MainIpopt/
 
 *__pycache__/
+

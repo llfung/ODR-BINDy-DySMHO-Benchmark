@@ -233,7 +233,9 @@ def optim_solve(y_init, t_span, initial_theta, theta_bounds, y, basis_0, basis_1
         m.x[i, t_span[0]].unfix() 
 
     # CONOPT
-    solver = SolverFactory('gams')
+    # solver = SolverFactory('gams')
+    # IPOPT
+    solver = SolverFactory('ipopt')
     results = solver.solve(m, tee=False)
 
     theta_out = [value(m.theta[i]) for i in m.params]
