@@ -222,7 +222,7 @@ def optim_solve(y_init, t_span, initial_theta, theta_bounds, y, basis_0, basis_1
     m.obj = Objective(rule=sum_objs, sense=minimize)
 
     # CONOPT
-    solver = SolverFactory('gams')
+    solver = SolverFactory('ipopt')
     results = solver.solve(m, tee=False)
     
     if results['Solver'][0]['Termination condition'] == 'infeasible': 

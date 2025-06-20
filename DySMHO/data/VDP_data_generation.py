@@ -9,7 +9,7 @@ import numpy as np
 
 # Defining dynamcis
 def dy_dt(y, t):
-    dy_dt = np.array([5*(y[0] - (1/3)*y[0]**3- y[1]), (1/5)*y[0]])
+    dy_dt =  np.array([y[1],0.5*(1-y[0]**2)*y[1]-y[0]])
 
     return dy_dt
 

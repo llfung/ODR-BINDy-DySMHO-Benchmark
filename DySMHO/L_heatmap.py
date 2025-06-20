@@ -1,7 +1,7 @@
 ## Adding DySMHO repositories to the environment
 import sys
 # Insert path to directory here
-path_to_dysmho = '/rds/general/user/lsf212/home/ODR-BINDy-DySMHO-Benchmark/DySMHO/'
+path_to_dysmho = 
 sys.path.insert(0, path_to_dysmho+'model')
 sys.path.insert(0, path_to_dysmho+'data')
 
