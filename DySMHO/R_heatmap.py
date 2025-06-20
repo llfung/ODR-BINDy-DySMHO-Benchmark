@@ -105,7 +105,7 @@ for i in range(nTest):
 
         ## Learning
         # Creating MHL class (note 3D model used) 
-        L_example = model_3D.threeD_MHL(y,t, [basis_y0,basis_y1,basis_y1])
+        L_example = model_3D.threeD_MHL(y,t, [basis_y0,basis_y1,basis_y2])
         # Applying SV smoothing 
         L_example.smooth()
         # Pre-processing 1: generates features and tests for Granger Causality 

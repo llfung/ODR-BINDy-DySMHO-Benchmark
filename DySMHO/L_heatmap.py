@@ -1,7 +1,7 @@
 ## Adding DySMHO repositories to the environment
 import sys
 # Insert path to directory here
-path_to_dysmho = 
+path_to_dysmho = '/rds/general/user/lsf212/home/ODR-BINDy-DySMHO-Benchmark/DySMHO/'
 sys.path.insert(0, path_to_dysmho+'model')
 sys.path.insert(0, path_to_dysmho+'data')
 
@@ -102,7 +102,7 @@ for i in range(nTest):
 
         ## Learning
         # Creating MHL class (note 3D model used) 
-        L_example = model_3D.threeD_MHL(y,t, [basis_y0,basis_y1,basis_y1])
+        L_example = model_3D.threeD_MHL(y,t, [basis_y0,basis_y1,basis_y2])
         # Applying SV smoothing 
         L_example.smooth()
         # Pre-processing 1: generates features and tests for Granger Causality 
