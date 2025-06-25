@@ -67,20 +67,29 @@ theta_target = pd.array([0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 
 ## Simulation parameters
 sigma_array = np.linspace(0.025, 0.4, 16)
-time_steps_array = np.linspace(10.0, 35.0, 6)
+time_steps_array = np.linspace(10.0, 30.0, 11)
 ii = int(os.environ['ii'])
 # ii=6
-idt =  (ii-1)%6 
-ieps = (ii-1)//6 
+idt =  (ii-1)%11 
+ieps = (ii-1)//11 
 
 # Number of test
-nTest = 50
-# Noise level
-sigma = 4.4685 * sigma_array[ieps] # Noise level
-# Number of sampling time periods taken per MHE step
-time_steps = time_steps_array[idt] - 5.0 
+nTest = 20
 
+# Horizon length for optimization problem (arbitrary time units) 
+horizon_length = 5.0  
+# Number of sampling time periods taken per MHE step
+time_steps = time_steps_array[idt] - horizon_length
+# Time step size
 dt = 0.005
+# Define initial conditions for the 3 states 
+y_init = [-6, 5, 0]
+
+xs = np.linspace(0.0, 30.0, int(30.0/dt) + 1)
+t_nf, y_nf = R_data_generation.data_gen(xs, y_init, [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], False)
+
+# Noise level
+sigma = np.std(y_nf,axis=None) * sigma_array[ieps] # Noise level
 
 # Initialize arrays to store results
 Success = np.zeros(nTest, dtype=bool)
@@ -90,12 +99,6 @@ ValidationError = np.zeros(nTest)
 for i in range(nTest):
     try:
         ## Data Generation
-        # Define initial conditions for the 3 states 
-        y_init = [-6, 5, 0]
-
-        # Horizon length for optimization problem (arbitrary time units) 
-        horizon_length = 5.0  
-
         # Data generation (time grid)
         xs = np.linspace(0.0, horizon_length + time_steps, int((horizon_length + time_steps)/dt) + 1)
         # Data generation (simulating true dynamics on the time grid with addition of white noise )
