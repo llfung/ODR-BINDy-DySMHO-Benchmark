@@ -69,12 +69,11 @@ theta_target = pd.array([0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 sigma_array = np.linspace(0.025, 0.4, 16)
 time_steps_array = np.linspace(10.0, 30.0, 11)
 ii = int(os.environ['ii'])
-# ii=6
 idt =  (ii-1)%11 
 ieps = (ii-1)//11 
 
 # Number of test
-nTest = 20
+nTest = 64
 
 # Horizon length for optimization problem (arbitrary time units) 
 horizon_length = 5.0  
@@ -92,7 +91,7 @@ t_nf, y_nf = R_data_generation.data_gen(xs, y_init, [0.0, 0.0, 0.0, 0.0, 0.0, 0.
 sigma = np.std(y_nf,axis=None) * sigma_array[ieps] # Noise level
 
 # Initialize arrays to store results
-Success = np.zeros(nTest, dtype=bool)
+Success = np.zeros(nTest)
 ModelError = np.zeros(nTest)
 ValidationError = np.zeros(nTest)
 
@@ -125,7 +124,7 @@ for i in range(nTest):
 
         # Check for sparsity
         if L_example.non_zero == non_zero_target :
-            Success[i] = True
+            Success[i] = 1.0
 
         # Coefficients Error
         theta_values = pd.DataFrame(L_example.theta_values)

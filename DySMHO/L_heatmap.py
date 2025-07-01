@@ -1,7 +1,7 @@
 ## Adding DySMHO repositories to the environment
 import sys
 # Insert path to directory here
-path_to_dysmho = 
+path_to_dysmho = '/rds/general/user/lsf212/home/ODR-BINDy-DySMHO-Benchmark/DySMHO/'
 sys.path.insert(0, path_to_dysmho+'model')
 sys.path.insert(0, path_to_dysmho+'data')
 
@@ -67,34 +67,39 @@ theta_target = pd.array([0.0, -10.0, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 
 ## Simulation parameters
 sigma_array = np.linspace(0.025, 0.4, 16)
-time_steps_array = np.linspace(1.0, 10.0, 10)
+time_steps_array = np.linspace(4.0, 10.0, 7)
 ii = int(os.environ['ii'])
-idt =  (ii-1)%10 
-ieps = (ii-1)//10 
+idt =  (ii-1)%7 
+ieps = (ii-1)//7 
 
 # Number of test
-nTest = 50
-# Noise level
-sigma = 16.0 * sigma_array[ieps] # Noise level
+nTest = 64
+
+# Horizon length for optimization problem (arbitrary time units) 
+horizon_length = 2.0  
 # Number of sampling time periods taken per MHE step
-time_steps = time_steps_array[idt] -2.0 
+time_steps = time_steps_array[idt] - horizon_length
+# Time step size
+dt = 0.001
+# Define initial conditions for the 3 states 
+y_init = [-8.0, 8.0, 27.0]
+
+xs = np.linspace(0.0, 10.0, int(10.0/dt) + 1)
+t_nf, y_nf = L_data_generation.data_gen(xs, y_init, [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], False)
+
+# Noise level
+sigma = np.std(y_nf,axis=None) * sigma_array[ieps] # Noise level
 
 # Initialize arrays to store results
-Success = np.zeros(nTest, dtype=bool)
+Success = np.zeros(nTest)
 ModelError = np.zeros(nTest)
 ValidationError = np.zeros(nTest)
 
 for i in range(nTest):
     try:
         ## Data Generation
-        # Define initial conditions for the 3 states 
-        y_init = [-8, 8, 27]
-
-        # Horizon length for optimization problem (arbitrary time units) 
-        horizon_length = 2.0  
-
         # Data generation (time grid)
-        xs = np.linspace(0.0, horizon_length + time_steps, 1000 * int(horizon_length + time_steps) + 1)
+        xs = np.linspace(0.0, horizon_length + time_steps, int((horizon_length + time_steps)/dt) + 1)
         # Data generation (simulating true dynamics on the time grid with addition of white noise )
         t, y = L_data_generation.data_gen(xs, y_init, [0.0, sigma, 0.0, sigma, 0.0, sigma], False) # Noise - Normal [mu, sigma, mu, sigma, mu, sigma]
         # No noise data
@@ -119,7 +124,7 @@ for i in range(nTest):
 
         # Check for sparsity
         if L_example.non_zero == non_zero_target :
-            Success[i] = True
+            Success[i] = 1.0
 
         # Coefficients Error
         theta_values = pd.DataFrame(L_example.theta_values)
