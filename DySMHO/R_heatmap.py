@@ -63,7 +63,7 @@ basis_y2 = {'functions': basis_functions_y2, 'names': basis_functions_names_y2}
 non_zero_target = [2, 3, 11, 12, 20, 23, 25]
 theta_target = pd.array([0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                       0.0, 1.0, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-                      0.2, 0.0, 0.0, 5.7, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0])
+                      0.2, 0.0, 0.0, -5.7, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0])
 
 ## Simulation parameters
 sigma_array = np.linspace(0.025, 0.4, 16)
