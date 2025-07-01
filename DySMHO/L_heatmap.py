@@ -113,7 +113,7 @@ for i in range(nTest):
         L_example.discover(horizon_length,
                         time_steps,
                         data_step = 100, # Number of time steps between two windows
-                        optim_options = {'nfe':50, 'ncp':5}, # ncp = number of collocation pt in FE, nfe = number of FE in the time horizon
+                        optim_options = {'nfe':80, 'ncp':5}, # ncp = number of collocation pt in FE, nfe = number of FE in the time horizon
                         thresholding_frequency = 10, # Small omega, Big omega is hard coded into line 553 in utils_3D as 4*(small omega)
                         thresholding_tolerance = 1) # This is the threshold, default to 1
 
